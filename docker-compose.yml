@@ -1,8 +1,9 @@
 version: "2"
 services:
 
+
     php:
-      container_name: php72
+      container_name: apache-php72
       restart: always
       build: ./build/php
       volumes:
@@ -14,8 +15,8 @@ services:
       environment:
         - VIRTUAL_HOST_WEIGHT=1
         - VIRTUAL_HOST=*
-      ports:
-        - "80:80"
+#      ports:
+#        - "800:80"
         
 
     mysql:
@@ -45,27 +46,13 @@ services:
         - 8080:80
 
 
-  #  lb:
-   #   container_name: haproxy
-    #  restart: always
-     # image: dockercloud/haproxy:1.3
-  #    volumes:
-   #     - /var/run/docker.sock:/var/run/docker.sock
-    #  ports:
-     ##   - 80:80
-    #  links:
-     #   - php
-
-
-#    nginx:
-#      container_name: nginx
-#      restart: always
-#      image: nginx
-#      volumes:
-#         - ./app/frontend/web:/usr/share/nginx/html
-#         - ./app/backend/web:/usr/share/nginx/html/office
-#      environment:
-#        - VIRTUAL_HOST_WEIGHT=2
-#        - VIRTUAL_HOST=*/assets/*, */office/assets/*
-
-
+    nginx:
+      container_name: nginx
+      restart: always
+      image: nginx
+      volumes:
+#        - ./nginx:/etc/nginx/
+         - ./nginx:/etc/nginx/conf.d 
+         - ./log:/var/log/nginx
+      ports:
+         - 80:80

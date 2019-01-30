@@ -15,7 +15,11 @@ cmd - script
 
 database - mysql storage
 
+apache.conf  - apache2 config
 
+log - log
+
+nginx - nginx config
 
 # Cliet Access
 
